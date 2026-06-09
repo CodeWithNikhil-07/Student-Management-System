@@ -1,2 +1,32 @@
-# Student-Management-System
-A web-based Student Management System that allows users to create, view, update, and delete student records using Express, MongoDB, Mongoose, EJS, and RESTful routing.
+# Student Management System
+
+A CRUD-based web application built using Node.js, Express.js, MongoDB, Mongoose, EJS, and Method Override.
+
+## Features
+
+- Add new students
+- View all students
+- View student details
+- Edit student information
+- Delete student records
+- MongoDB database integration
+- RESTful routing
+- Server-side rendering with EJS
+
+## Tech Stack
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- EJS
+- Method Override
+- Tailwind CSS
+
+## Installation
+
+```bash
+git clone <repository-url>
+cd student-management-system
+npm install
+npm start
