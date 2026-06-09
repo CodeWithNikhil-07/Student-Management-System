@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT;
 const mongoose = require("mongoose");
 const connectDb = require("./db/db");
+const studentModel = require("./models/student");
 
 connectDb();
 
