@@ -10,7 +10,7 @@ A CRUD-based web application built using Node.js, Express.js, MongoDB, Mongoose,
 - Edit student information
 - Delete student records
 - MongoDB database integration
-- RESTful routing
+- RESTful routings
 - Server-side rendering with EJS
 
 ## Tech Stack
