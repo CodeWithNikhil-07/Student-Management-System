@@ -75,6 +75,48 @@ app.get("/students/:id", async (req, res) => {
     }
 });
 
+// SHOW EDIT FORM
+app.get("/students/:id/edit", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const student = await Student.findById(id);
+
+        if (!student) {
+            return res.status(404).send("Student Not Found");
+        }
+
+        res.render("students/edit", { student });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error Loading Edit Page");
+    }
+});
+
+// UPDATE STUDENT
+app.put("/students/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await Student.findByIdAndUpdate(
+            id,
+            req.body,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        res.redirect("/students");
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error Updating Student");
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`Server Running On Port ${port}`);
 });
