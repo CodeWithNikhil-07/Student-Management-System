@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
+    <title>Add Student</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -17,6 +17,7 @@
             <h1 class="text-4xl font-bold text-gray-800">
                 Student Management System
             </h1>
+
             <p class="text-gray-600 mt-2">
                 Add and manage student records efficiently
             </p>
@@ -29,6 +30,7 @@
                 <h2 class="text-2xl font-semibold text-gray-800">
                     Add New Student
                 </h2>
+
                 <p class="text-gray-500 text-sm mt-1">
                     Enter student details below
                 </p>
@@ -41,10 +43,12 @@
                     <label class="block text-gray-700 font-medium mb-2">
                         Student Name
                     </label>
+
                     <input
                         type="text"
                         name="name"
                         placeholder="Enter full name"
+                        autocomplete="name"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 outline-none transition"
                     >
@@ -55,9 +59,12 @@
                     <label class="block text-gray-700 font-medium mb-2">
                         Age
                     </label>
+
                     <input
                         type="number"
                         name="age"
+                        min="1"
+                        max="100"
                         placeholder="Enter age"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 outline-none transition"
@@ -69,10 +76,12 @@
                     <label class="block text-gray-700 font-medium mb-2">
                         Email Address
                     </label>
+
                     <input
                         type="email"
                         name="email"
                         placeholder="example@gmail.com"
+                        autocomplete="email"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 outline-none transition"
                     >
@@ -83,6 +92,7 @@
                     <label class="block text-gray-700 font-medium mb-2">
                         Course
                     </label>
+
                     <select
                         name="course"
                         required
@@ -97,19 +107,30 @@
                     </select>
                 </div>
 
-                <!-- Button -->
-                <div class="pt-4">
+                <!-- Buttons -->
+                <div class="flex gap-4 pt-4">
+
+                    <a
+                        href="/students"
+                        class="w-1/2 text-center bg-gray-200 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-300 transition duration-300"
+                    >
+                        ← Back
+                    </a>
+
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold text-lg hover:scale-[1.02] hover:shadow-xl transition duration-300"
+                        class="w-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold text-lg hover:scale-[1.02] hover:shadow-xl transition duration-300"
                     >
                         ➕ Add Student
                     </button>
+
                 </div>
 
             </form>
 
         </div>
+
     </div>
+
 </body>
 </html>
