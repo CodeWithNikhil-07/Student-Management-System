@@ -8,7 +8,7 @@ const connectDb = require("./db/db");
 const Student = require("./models/student");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 // Database Connection
 connectDb();
@@ -116,6 +116,20 @@ app.put("/students/:id", async (req, res) => {
     }
 });
 
+// DELETE STUDENT
+app.delete("/students/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await Student.findByIdAndDelete(id);
+
+        res.redirect("/students");
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error Deleting Student");
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server Running On Port ${port}`);
