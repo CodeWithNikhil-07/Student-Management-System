@@ -1,14 +1,34 @@
 const mongoose = require("mongoose");
 
-// Schema = Structure of a document inside a collection.
-const studentSchema = new mongoose.Schema({
-    name : String,
-    age : Number,
-    email : String,
-    course : String
-});
+const studentSchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+            trim: true
+        },
 
-const Student = mongoose.model("student",studentSchema);
-// It only creates a Model object in Node.js.
+        age: {
+            type: Number,
+            required: true,
+            min: 1
+        },
 
-module.exports = Student;
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true
+        },
+
+        course: {
+            type: String,
+            required: true
+        }
+    },
+    {
+        timestamps: true
+    }
+);
+
+module.exports = mongoose.model("Student", studentSchema);
