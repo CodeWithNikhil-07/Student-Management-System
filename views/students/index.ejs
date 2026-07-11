@@ -104,7 +104,13 @@
                     Name (Z → A)
                 </option>
 
-                
+                <option value="ageAsc" <%= sort === "ageAsc" ? "selected" : "" %>>
+                    Age (Low → High)
+                </option>
+
+                <option value="ageDesc" <%= sort === "ageDesc" ? "selected" : "" %>>
+                    Age (High → Low)
+                </option>
 
             </select>
 
