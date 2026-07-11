@@ -34,6 +34,103 @@
         </div>
     </div>
 
+    <!-- Search Filter Sort -->
+    <div class="max-w-7xl mx-auto px-6 mt-8">
+
+        <form
+            action="/students"
+            method="GET"
+            class="bg-white rounded-2xl shadow-lg p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+
+            <!-- Search -->
+            <input
+                type="text"
+                name="search"
+                value="<%= search || '' %>"
+                placeholder="🔍 Search by Name"
+                class="px-5 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 outline-none transition"
+            >
+
+            <!-- Course Filter -->
+            <select
+                name="course"
+                class="px-5 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 outline-none"
+            >
+
+                <option value="">All Courses</option>
+
+                <option value="B.Tech CSE" <%= course === "B.Tech CSE" ? "selected" : "" %>>
+                    B.Tech CSE
+                </option>
+
+                <option value="B.Tech IT" <%= course === "B.Tech IT" ? "selected" : "" %>>
+                    B.Tech IT
+                </option>
+
+                <option value="BCA" <%= course === "BCA" ? "selected" : "" %>>
+                    BCA
+                </option>
+
+                <option value="MCA" <%= course === "MCA" ? "selected" : "" %>>
+                    MCA
+                </option>
+
+                <option value="BBA" <%= course === "BBA" ? "selected" : "" %>>
+                    BBA
+                </option>
+
+            </select>
+
+            <!-- Sort -->
+            <select
+                name="sort"
+                class="px-5 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 outline-none"
+            >
+
+                <option value="newest" <%= sort === "newest" ? "selected" : "" %>>
+                    Newest First
+                </option>
+
+                <option value="oldest" <%= sort === "oldest" ? "selected" : "" %>>
+                    Oldest First
+                </option>
+
+                <option value="nameAsc" <%= sort === "nameAsc" ? "selected" : "" %>>
+                    Name (A → Z)
+                </option>
+
+                <option value="nameDesc" <%= sort === "nameDesc" ? "selected" : "" %>>
+                    Name (Z → A)
+                </option>
+
+                
+
+            </select>
+
+            <!-- Buttons -->
+            <div class="flex gap-3">
+
+                <button
+                    type="submit"
+                    class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold hover:scale-105 transition duration-300"
+                >
+                    Apply
+                </button>
+
+                <a
+                    href="/students"
+                    class="flex-1 bg-gray-300 text-gray-800 py-3 rounded-xl text-center font-semibold hover:bg-gray-400 transition duration-300"
+                >
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-6 py-10">
 
@@ -46,7 +143,7 @@
                 </h2>
 
                 <p class="text-gray-500 mt-3">
-                    Start by adding your first student.
+                    Try changing your search, filter, or sorting options.
                 </p>
 
                 <a
@@ -92,22 +189,18 @@
                         <div class="mt-6 space-y-2">
 
                             <p class="text-gray-700">
-                                <span class="font-semibold">
-                                    Age:
-                                </span>
+                                <span class="font-semibold">Age:</span>
                                 <%= student.age %>
                             </p>
 
                             <p class="text-gray-700 break-all">
-                                <span class="font-semibold">
-                                    Email:
-                                </span>
+                                <span class="font-semibold">Email:</span>
                                 <%= student.email %>
                             </p>
 
                         </div>
 
-                        <!-- Action Buttons -->
+                        <!-- Buttons -->
                         <div class="mt-8 flex gap-2">
 
                             <a
