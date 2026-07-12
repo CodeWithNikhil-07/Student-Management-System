@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 min-h-screen">
+
+    <!-- Header -->
+    <div class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+
+            <div>
+                <h1 class="text-4xl font-bold text-gray-800">
+                    Student Management System
+                </h1>
+
+                <p class="text-gray-500 mt-1">
+                    Manage student records efficiently
+                </p>
+            </div>
+
+            <a
+                href="/students/new"
+                class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transition duration-300 shadow-lg"
+            >
+                + Add Student
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Search / Filter / Sort -->
+    <div class="max-w-7xl mx-auto px-6 mt-8">
+
+        <form
+            action="/students"
+            method="GET"
+            class="bg-white rounded-2xl shadow-lg p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+
+            <input
+                type="text"
+                name="search"
+                value="<%= search || '' %>"
+                placeholder="🔍 Search Student"
+                class="px-5 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 outline-none"
+            >
+
+            <select
+                name="course"
+                class="px-5 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 outline-none"
+            >
+
+                <option value="">All Courses</option>
+
+                <option value="B.Tech CSE" <%= course === "B.Tech CSE" ? "selected" : "" %>>
+                    B.Tech CSE
+                </option>
+
+                <option value="B.Tech IT" <%= course === "B.Tech IT" ? "selected" : "" %>>
+                    B.Tech IT
+                </option>
+
+                <option value="BCA" <%= course === "BCA" ? "selected" : "" %>>
+                    BCA
+                </option>
+
+                <option value="MCA" <%= course === "MCA" ? "selected" : "" %>>
+                    MCA
+                </option>
+
+                <option value="BBA" <%= course === "BBA" ? "selected" : "" %>>
+                    BBA
+                </option>
+
+            </select>
+
+            <select
+                name="sort"
+                class="px-5 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 outline-none"
+            >
+
+                <option value="newest" <%= sort === "newest" ? "selected" : "" %>>
+                    Newest First
+                </option>
+
+                <option value="oldest" <%= sort === "oldest" ? "selected" : "" %>>
+                    Oldest First
+                </option>
+
+                <option value="nameAsc" <%= sort === "nameAsc" ? "selected" : "" %>>
+                    Name A-Z
+                </option>
+
+                <option value="nameDesc" <%= sort === "nameDesc" ? "selected" : "" %>>
+                    Name Z-A
+                </option>
+
+                <option value="ageAsc" <%= sort === "ageAsc" ? "selected" : "" %>>
+                    Age Low-High
+                </option>
+
+                <option value="ageDesc" <%= sort === "ageDesc" ? "selected" : "" %>>
+                    Age High-Low
+                </option>
+
+            </select>
+
+            <div class="flex gap-3">
+
+                <button
+                    class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:scale-105 transition"
+                >
+                    Apply
+                </button>
+
+                <a
+                    href="/students"
+                    class="flex-1 bg-gray-300 text-center py-3 rounded-xl font-semibold hover:bg-gray-400 transition"
+                >
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Cards -->
+    <div class="max-w-7xl mx-auto px-6 py-10">
+
+        <% if (students.length === 0) { %>
+
+            <div class="bg-white rounded-3xl shadow-xl p-12 text-center">
+
+                <h2 class="text-3xl font-bold text-gray-700">
+                    No Students Found
+                </h2>
+
+                <p class="text-gray-500 mt-3">
+                    Try changing your search, filter or sorting.
+                </p>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <% students.forEach(student => { %>
+
+                    <div class="bg-white rounded-3xl shadow-xl p-6 hover:-translate-y-2 hover:shadow-2xl transition">
+
+                        <div class="flex justify-center mb-5">
+
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold">
+                                <%= student.name.charAt(0).toUpperCase() %>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center">
+
+                            <h2 class="text-2xl font-bold text-gray-800">
+                                <%= student.name %>
+                            </h2>
+
+                            <p class="text-gray-500 mt-2">
+                                <%= student.course %>
+                            </p>
+
+                        </div>
+
+                        <div class="mt-6 space-y-2">
+
+                            <p>
+                                <span class="font-semibold">Age:</span>
+                                <%= student.age %>
+                            </p>
+
+                            <p class="break-all">
+                                <span class="font-semibold">Email:</span>
+                                <%= student.email %>
+                            </p>
+
+                        </div>
+
+                        <div class="mt-8 flex gap-2">
+
+                            <a
+                                href="/students/<%= student._id %>"
+                                class="flex-1 text-center bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-600"
+                            >
+                                View
+                            </a>
+
+                            <a
+                                href="/students/<%= student._id %>/edit"
+                                class="flex-1 text-center bg-yellow-500 text-white py-2 rounded-xl hover:bg-yellow-600"
+                            >
+                                Edit
+                            </a>
+
+                            <form
+                                action="/students/<%= student._id %>?_method=DELETE"
+                                method="POST"
+                                class="flex-1"
+                            >
+
+                                <button
+                                    type="submit"
+                                    onclick="return confirm('Delete this student?')"
+                                    class="w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600"
+                                >
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+              <!-- Pagination -->
+            <% if (totalPages > 1) { %>
+
+                <div class="flex justify-center items-center gap-2 mt-10 flex-wrap">
+
+                    <!-- Previous -->
+                    <% if (page > 1) { %>
+
+                        <a
+                            href="/students?page=<%= page - 1 %>&search=<%= search || '' %>&course=<%= course || '' %>&sort=<%= sort || 'newest' %>"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                        >
+                            ← Previous
+                        </a>
+
+                    <% } else { %>
+
+                        <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                            ← Previous
+                        </span>
+
+                    <% } %>
+
+                    <!-- Page Numbers -->
+                    <% for(let i = 1; i <= totalPages; i++) { %>
+
+                        <% if(i === page) { %>
+
+                            <span class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold">
+                                <%= i %>
+                            </span>
+
+                        <% } else { %>
+
+                            <a
+                                href="/students?page=<%= i %>&search=<%= search || '' %>&course=<%= course || '' %>&sort=<%= sort || 'newest' %>"
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+                            >
+                                <%= i %>
+                            </a>
+
+                        <% } %>
+
+                    <% } %>
+
+                    <!-- Next -->
+                    <% if (page < totalPages) { %>
+
+                        <a
+                            href="/students?page=<%= page + 1 %>&search=<%= search || '' %>&course=<%= course || '' %>&sort=<%= sort || 'newest' %>"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                        >
+                            Next →
+                        </a>
+
+                    <% } else { %>
+
+                        <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                            Next →
+                        </span>
+
+                    <% } %>
+
+                </div>
+
+            <% } %>
+
+        <% } %>
+
+    </div>
+
+</body>
+</html>
